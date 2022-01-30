@@ -34,7 +34,7 @@ namespace TechTool
 
 
 
-        public string Print()
+        public void Print()
         {
             Console.Clear();
 
@@ -46,11 +46,22 @@ namespace TechTool
 
             foreach (MenuLine menuLine in _menuLine)
             {
-                _print += "  " + menuLine.Key + ")     " + menuLine.Description + eol;
+                _print += "   " + menuLine.Key + ")     " + menuLine.Description + eol;
             }
-            return _print;
+            Console.WriteLine(_print);
         }
-    
+
+
+
+        public char Exec()
+        {
+            Print();
+            Common com = new Common();
+            com.WriteFormat("#L##FYellow#Enter Selection:#L##FDarkGreen# <F1> for Help#R#");
+
+            char key = Console.ReadKey().KeyChar;
+           return Char.ToUpper(key);
+        }
 
 
         class MenuLine
@@ -61,27 +72,27 @@ namespace TechTool
 
 
 
-    string Header()
-        {
-            int letterspacing = 1;
-            if (w>20) { letterspacing = 2; }
-            if (w>40) { letterspacing = 3; }
-            if (w>80) { letterspacing = 4; }
+        string Header()
+            {
+                int letterspacing = 1;
+                if (w>20) { letterspacing = 2; }
+                if (w>40) { letterspacing = 3; }
+                if (w>80) { letterspacing = 4; }
 
-            string header = "TECHTOOL";           
-            header = String.Join(new string(' ', letterspacing-1), header.ToCharArray());
+                string header = "TECHTOOL";           
+                header = String.Join(new string(' ', letterspacing-1), header.ToCharArray());
 
-            string underline = new string('=', header.Length + letterspacing*2);
+                string underline = new string('=', header.Length + letterspacing*2);
 
-            header    =    header.PadLeft((w +    header.Length) / 2);  //need the + here
-            underline = underline.PadLeft((w + underline.Length) / 2);
+                header    =    header.PadLeft((w +    header.Length) / 2);  //need the + here
+                underline = underline.PadLeft((w + underline.Length) / 2);
 
 
-            //Title
-            string title = _title.PadLeft((w + _title.Length) /2);
+                //Title
+                string title = _title.PadLeft((w + _title.Length) /2);
 
-            return header + "\n" + underline + "\n\n" + title;
-        }
+                return header + "\n" + underline + "\n\n" + title;
+            }
 
 
 
